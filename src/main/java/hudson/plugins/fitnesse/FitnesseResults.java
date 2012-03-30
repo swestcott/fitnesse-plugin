@@ -165,8 +165,8 @@ public class FitnesseResults extends TabulatedResult implements Comparable<Fitne
 
 	@Override
 	public Result getBuildResult() {
-		if (getFailCount() > 0) return Result.FAILURE;
-		return null;
+		if (getExceptionCount() > 0) return Result.FAILURE;
+		return super.getBuildResult();
 	}
 
 	@Override
