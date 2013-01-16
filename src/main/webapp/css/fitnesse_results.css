@@ -58,3 +58,36 @@
 .fit_grey {
   color: #808080;
 }
+
+.collapsable  {
+  margin-left:  2em;
+}
+
+.collapse_rim {
+  border:  solid;
+  border-width :  thin;
+  border-color :  #BF8660;
+  border-style :  dotted;
+  margin :  2em;
+}
+
+div.collapsable {
+  margin: 0px 0px 0px 15px;
+  display: block;
+}
+
+div.collapsable-contents {
+  margin: 0px 0px 0px 15px;
+  display: block;
+}
+
+div.invisible {
+  line-height: 0px;
+  margin: 0px 0px 0px 0px;
+  display: none;
+  visibility: hidden;
+}
+
+.hidden {
+  display: none;
+}
