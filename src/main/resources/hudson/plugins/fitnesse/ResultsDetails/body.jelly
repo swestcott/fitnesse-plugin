@@ -1,6 +1,87 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler"
 	xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson"
 	xmlns:f="/lib/form" xmlns:i="jelly:fmt">
-	<link rel="stylesheet" href="/plugin/fitnesse/css/fitnesse_results.css" type="text/css"/>
-	<div>${it.getDetailsHtml()}</div>	
+	
+<script type="text/javascript">
+/**
+ * some fitnesse javascript for displaying fitnesse test results
+ */
+var collapsableOpenCss = "collapsable";
+var collapsableClosedCss = "hidden";
+var collapsableOpenImg = "${resURL}/plugin/fitnesse/icons/collapsableOpen.gif";
+var collapsableClosedImg = "${resURL}/plugin/fitnesse/icons/collapsableClosed.gif";
+
+function toggleCollapsable(id)
+{
+  var div = document.getElementById(id);
+  var img = document.getElementById("img" + id);
+  if (div.className.indexOf(collapsableClosedCss) != -1)
+  {
+    div.className = collapsableOpenCss;
+    img.src = collapsableOpenImg;
+  }
+  else
+  {
+    div.className = collapsableClosedCss;
+    img.src = collapsableClosedImg;
+  }
+}
+
+function popup(window_id) {
+  var window = document.getElementById(window_id);
+  window.style.visibility = "visible";
+}
+
+function popdown(window_id) {
+  var window = document.getElementById(window_id);
+  window.style.visibility = "hidden";
+}
+
+function expandOrCollapseAll(cssClass)
+{
+  divs = document.getElementsByTagName("div");
+  for (i = 0; i &lt; divs.length; i++)
+  {
+    div = divs[i];
+    if (div.className == cssClass)
+    {
+      toggleCollapsable(div.id);
+    }
+  }
+}
+
+function collapseAll()
+{
+  expandOrCollapseAll(collapsableOpenCss);
+}
+
+function expandAll()
+{
+  expandOrCollapseAll(collapsableClosedCss);
+}
+</script>
+
+	<link rel="stylesheet" href="${resURL}/plugin/fitnesse/css/fitnesse_results.css" type="text/css"/>
+	<div>${it.getDetailsHtml()}</div>
+
+
+<script type="text/javascript">
+  /* fix up the expand/collapse buttons, because the fitnesse results html references paths that do not exist within jenkins */
+  
+  divs = document.getElementsByTagName("div");
+  for (i = 0; i &lt; divs.length; i++)
+  {
+    div = divs[i];
+    if (div.className == collapsableOpenCss)
+    {
+    	var img = document.getElementById("img" + div.id);
+    	img.src = "dummy";
+    	img.src = collapsableOpenImg;
+    }
+  }
+  
+  collapseAll();
+  expandAll();
+</script>
+
 </j:jelly>
